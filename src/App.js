@@ -1,11 +1,167 @@
-import logo from './logo.svg';
 import './App.css';
+import ProfileContainer from "./profileComponents/ProfileContainer";
+import Form from "./components/Form";
+import NavBar from "./components/Navbar";
 
-function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+import { Switch, Route, withRouter, Redirect } from "react-router-dom";
+
+import React, { Component } from "react";
+
+class App extends Component {
+  state = {
+    id: 0,
+    username: "",
+    recipes: [],
+    token: "",
+  };
+
+  componentDidMount = () => {
+    console.log("Hello!");
+    if (localStorage.token) {
+      console.log("Hello again!");
+      fetch("http://localhost:3000/profile", {
+        headers: {
+          authorization: localStorage.token,
+        },
+      })
+        .then((res) => res.json())
+        .then(this.handleResponse);
+    }
+  };
+
+  handleLoginSubmit = (userInfo) => {
+    console.log("Login form has been submitted");
+
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        username: userInfo.username,
+        password: userInfo.password,
+      }),
+    })
+      .then((res) => res.json())
+      .then(this.handleResponse);
+  };
+
+  handleRegisterSubmit = (userInfo) => {
+    console.log("Register form has been submitted");
+
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        username: userInfo.username,
+        password: userInfo.password,
+      }),
+    })
+      .then((res) => res.json())
+      .then(this.handleResponse);
+  };
+
+  handleResponse = (res) => {
+    console.log(res);
+    if (res.token) {
+      this.setState({
+        id: res.user.id,
+        username: res.user.username,
+        recipes: res.user.recipes,
+        token: res.token,
+      });
+      localStorage.token = res.token;
+      this.props.history.push("/profile");
+    } else {
+      alert("Messed up");
+    }
+  };
+
+  handleLogout = () => {
+    localStorage.clear()
+    this.setState({
+        id: 0,
+        username: "",
+        recipes: [],
+        token: "",
+
+    })
+  }
+
+  renderForm = (routerProps) => {
+    if (routerProps.location.pathname === "/login") {
+      return (
+        <Form formName="Login Form" handleSubmit={this.handleLoginSubmit} />
+      );
+    } else if (routerProps.location.pathname === "/register") {
+      return (
+        <Form
+          formName="Register Form"
+          handleSubmit={this.handleRegisterSubmit}
+        />
+      );
+    }
+  };
+
+  deleteRecipeFromState = (recipe) => {
+    let newArrayOfRecipes = this.state.recipes.filter((recipeObj) => {
+      return recipeObj.id !== recipe.id;
+    });
+    this.setState({
+      recipes: newArrayOfRecipes,
+    });
+  };
+
+  addRecipe = (recipe) => {
+    this.setState({ recipes: [...this.state.recipes, recipe] });
+  };
+
+  updateRecipe = (updatedRecipe) => {
+    let updatingRecipes = this.state.recipes.map((recipe) => {
+      if (recipe.id === updatedRecipe.id) {
+        return updatedRecipe;
+      } else {
+        return recipe;
+      }
+    });
+    this.setState({recipes: updatingRecipes})
+  };
+
+  renderProfile = () => {
+    if (this.state.token) {
+      return (
+        <ProfileContainer
+          username={this.state.username}
+          recipes={this.state.recipes}
+          addRecipe={this.addRecipe}
+          deleteRecipeFromState={this.deleteEntryFromState}
+          updateRecipe={this.updateRecipe}
+          token={this.state.token}
+          handleLogout={this.handleLogout}
+        />
+      );
+    } else { 
+      return <Redirect to="/login" />
+    }
+  };
+
+  render() {
+    console.log(this.state);
+    return (
+      <div className="App">
+        <div className="page-container">
+        <NavBar />
+        <Switch>
+          <Route path="/login" render={this.renderForm}></Route>
+          <Route path="/register" render={this.renderForm}></Route>
+          <Route path="/profile" render={this.renderProfile}></Route>
+        </Switch>
+      </div>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withRouter(App);
