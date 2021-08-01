@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-// import Entry from "./Entry";
-// import NewEntryForm from "./NewEntryForm";
+import Recipe from "./Recipe";
+import NewRecipeForm from "./NewRecipeForm";
 
 export default class ProfileContainer extends Component {
 
@@ -9,17 +9,20 @@ export default class ProfileContainer extends Component {
   render() {
     return (
       <div>
-        <h2>Hi {this.props.username}!</h2>
+        <h2>{this.props.username}</h2>
+        <h3>{this.props.status}</h3>
 
-        {/* <div className="style-box">
-        <NewEntryForm addEntry={this.props.addEntry} token={this.props.token} />
+        {this.props.recipes.map((recipe) => (
+          <Recipe key={recipe.id} recipe={recipe} updateRecipe={this.props.updateRecipe} deleteRecipeFromState={this.props.deleteRecipeFromState} token={this.props.token}/>
+        ))} 
+
+        <div className="style-box">
+        <NewRecipeForm addRecipe={this.props.addRecipe} token={this.props.token} />
         </div>
 
-        {this.props.entries.map((entry) => (
-          <Entry key={entry.id} entry={entry} updateEntry={this.props.updateEntry} deleteEntryFromState={this.props.deleteEntryFromState} token={this.props.token}/>
-        ))} */}
 
-        <button onClick={this.handleClick}>Sign Out</button>
+
+        <button className='blue-button' onClick={this.handleClick}>Sign Out</button>
       </div>
     );
   }

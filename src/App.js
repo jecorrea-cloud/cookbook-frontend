@@ -1,7 +1,7 @@
-import './App.css';
 import ProfileContainer from "./profileComponents/ProfileContainer";
 import Form from "./components/Form";
 import NavBar from "./components/Navbar";
+import './App.css';
 
 import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 
@@ -11,6 +11,8 @@ class App extends Component {
   state = {
     id: 0,
     username: "",
+    status: "",
+    profilePic: "",
     recipes: [],
     token: "",
   };
@@ -69,6 +71,7 @@ class App extends Component {
       this.setState({
         id: res.user.id,
         username: res.user.username,
+        status: res.user.status,
         recipes: res.user.recipes,
         token: res.token,
       });
@@ -85,6 +88,8 @@ class App extends Component {
         id: 0,
         username: "",
         recipes: [],
+        status: "",
+        profilePic: "",
         token: "",
 
     })
@@ -134,9 +139,10 @@ class App extends Component {
       return (
         <ProfileContainer
           username={this.state.username}
+          status={this.state.status}
           recipes={this.state.recipes}
           addRecipe={this.addRecipe}
-          deleteRecipeFromState={this.deleteEntryFromState}
+          deleteRecipeFromState={this.deleteRecipeFromState}
           updateRecipe={this.updateRecipe}
           token={this.state.token}
           handleLogout={this.handleLogout}
