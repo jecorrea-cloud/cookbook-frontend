@@ -98,12 +98,12 @@ class App extends Component {
   renderForm = (routerProps) => {
     if (routerProps.location.pathname === "/login") {
       return (
-        <Form formName="Login Form" handleSubmit={this.handleLoginSubmit} />
+        <Form formName="Login" handleSubmit={this.handleLoginSubmit} />
       );
     } else if (routerProps.location.pathname === "/register") {
       return (
         <Form
-          formName="Register Form"
+          formName="Sign Up"
           handleSubmit={this.handleRegisterSubmit}
         />
       );

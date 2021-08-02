@@ -102,7 +102,7 @@ export default class Recipe extends Component {
               value={this.state.cooktime}
               onChange={this.handleChange}
             />
-            <input type="submit" value="Submit" />
+            
             <input
               type="text"
               autoComplete="off"
@@ -124,6 +124,7 @@ export default class Recipe extends Component {
               value={this.state.ingredients}
               onChange={this.handleChange}
             />
+            <input className='blue-button' type="submit" value="Submit" />
           </form>
         </Popup>
 
