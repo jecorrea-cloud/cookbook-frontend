@@ -9,14 +9,16 @@ export default class ProfileContainer extends Component {
   render() {
     return (
       <div>
-        <h2>{this.props.username}</h2>
-        <h3>{this.props.status}</h3>
+        <div className="status">
+        <h3>{this.props.username}</h3>
+        <h4>{this.props.status}</h4>
+        </div>
 
         {this.props.recipes.map((recipe) => (
           <Recipe key={recipe.id} recipe={recipe} updateRecipe={this.props.updateRecipe} deleteRecipeFromState={this.props.deleteRecipeFromState} token={this.props.token}/>
         ))} 
 
-        <div className="style-box">
+        <div>
         <NewRecipeForm addRecipe={this.props.addRecipe} token={this.props.token} />
         </div>
 

@@ -158,7 +158,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="page-container">
-        <NavBar />
+        <NavBar props={this.state.token}/>
         <Switch>
           <Route path="/login" render={this.renderForm}></Route>
           <Route path="/register" render={this.renderForm}></Route>

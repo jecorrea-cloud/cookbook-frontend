@@ -38,7 +38,7 @@ class Form extends Component {
           value={password} 
           onChange={this.handleChange}
         /><br/>
-        <input type="submit" value="Submit"/>
+        <input className='blue-button' type="submit" value="Submit"/>
       </form>
     );
   }

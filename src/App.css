@@ -21,30 +21,33 @@ div.nav-bar{
 }
 
 .blue-button{
-  background-color: blue;
-  border: 2px solid blue;
+  background-color: hsl(200, 100%, 50%);
+  border: none;
   outline: none;
   color: white;
   font-weight: bold;
   margin: 4px;
-  padding: 2px;
-  border-radius: 3px;
+  padding: 5px 20px;
+  border-radius: 5px;
 }
 
 .red-button{
-  background-color: red;
-  border: 2px solid red;
+  background-color: hsl(0, 100%, 50%);
+  border: none;
   outline: none;
   color: white;
   font-weight: bold;
   margin: 4px;
   padding: 2px;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 .blue-button:hover, .red-button:hover{
   opacity:75%;
   
-  box-shadow: 5px 5px #EBB8B1;
+  /* box-shadow: 5px 5px #2b2b2b; */
 }
 
+div.status{
+  text-align: left;
+}

@@ -37,6 +37,13 @@ export default class NewRecipeForm extends Component {
         .then((recipe) => {
             if(recipe.id){
             this.props.addRecipe(recipe)
+            this.setState({
+              name : "",
+              cooktime : "",
+              servings: "",
+              steps : "",
+              ingredients : "",
+          })
       }
     })
   }

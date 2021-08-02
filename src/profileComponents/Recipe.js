@@ -10,14 +10,15 @@ export default class Recipe extends Component {
     servings: this.props.recipe.servings,
     steps: this.props.recipe.steps, 
     ingredients: this.props.recipe.ingredients, 
-    // open: false
+    formView : false,
   }
 
-  // setOpen = ()=> {
-  //   this.setState({
-  //     open: !this.state.open
-  //   })
-  // }
+
+      toggleForm = () => {
+        this.setState({
+            formView : !this.state.formView
+        })
+    }
 
   handleDelete = () => {
 
@@ -79,7 +80,7 @@ export default class Recipe extends Component {
 
             <Popup
           trigger={
-            <button className='blue-button' style={{ padding: 5, margin: 5 }} onClick = {this.setOpen}>
+            <button className='blue-button' style={{ padding: 5, margin: 5 }} >
               <span className="cardEditButton">✏️Edit</span>
             </button>
           }
