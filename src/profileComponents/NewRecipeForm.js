@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Popup } from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 export default class NewRecipeForm extends Component {
   state = {
@@ -6,7 +8,8 @@ export default class NewRecipeForm extends Component {
     cooktime: "", 
     servings:"",
     steps: "", 
-    ingredients:"", 
+    ingredients:"",
+    picture:"", 
   };
 
 
@@ -30,6 +33,7 @@ export default class NewRecipeForm extends Component {
               servings: this.state.servings,
               steps: this.state.steps, 
               ingredients: this.state.ingredients,
+              picture: this.state.picture,
             })
         })
         .then(res => res.json())
@@ -42,6 +46,7 @@ export default class NewRecipeForm extends Component {
               servings: "",
               steps : "",
               ingredients : "",
+              picture: "",
           })
       }
     })
@@ -49,6 +54,14 @@ export default class NewRecipeForm extends Component {
     
   render() {
     return (
+      <Popup
+      trigger={
+        <button className='blue-button' style={{ padding: 5, margin: 5 }} >
+          <span className="cardAddButton">Add a new recipe</span>
+        </button>
+      }
+      modal
+    >
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="name">Name: </label>
         <input
@@ -66,7 +79,15 @@ export default class NewRecipeForm extends Component {
           value={this.state.cooktime}
           onChange={this.handleInput}
         /> <br/>
-        <label htmlFor="servings">Servings</label>
+        <label htmlFor="picture">Picture: </label>
+        <input
+          type="text"
+          id="picture"
+          name="picture"
+          value={this.state.picture}
+          onChange={this.handleInput}
+        /> <br/>
+        <label htmlFor="servings">Servings: </label>
         <input
           type="text"
           id="servings"
@@ -74,7 +95,7 @@ export default class NewRecipeForm extends Component {
           value={this.state.servings}
           onChange={this.handleInput}
         /> <br/>
-        <label htmlFor="steps">Instructions</label>
+        <label htmlFor="steps">Instructions: </label>
         <input
           type="text"
           id="steps"
@@ -82,7 +103,7 @@ export default class NewRecipeForm extends Component {
           value={this.state.steps}
           onChange={this.handleInput}
         /> <br/>
-        <label htmlFor="ingredients">Ingredients</label>
+        <label htmlFor="ingredients">Ingredients: </label>
         <input
           type="text"
           id="ingredients"
@@ -92,6 +113,7 @@ export default class NewRecipeForm extends Component {
         /> <br/>
         <input className='blue-button' type="submit" value="Add new recipe" />
       </form>
+      </Popup>
       );
   }
 }

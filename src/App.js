@@ -1,4 +1,5 @@
 import ProfileContainer from "./profileComponents/ProfileContainer";
+import Home from "./components/Home"
 import Form from "./components/Form";
 import NavBar from "./components/Navbar";
 import './App.css';
@@ -158,11 +159,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="page-container">
-        <NavBar props={this.state.token}/>
+        <NavBar token={this.state.token}/>
         <Switch>
           <Route path="/login" render={this.renderForm}></Route>
           <Route path="/register" render={this.renderForm}></Route>
           <Route path="/profile" render={this.renderProfile}></Route>
+          <Route path="/" exact component={Home} />
         </Switch>
       </div>
       </div>
