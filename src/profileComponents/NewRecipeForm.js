@@ -21,7 +21,7 @@ export default class NewRecipeForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    fetch("http://localhost:3000/recipes", {
+    fetch("https://git.heroku.com/book-cook-backend.git/recipes", {
             method: "POST",
             headers: {
                 "content-type": "application/json",

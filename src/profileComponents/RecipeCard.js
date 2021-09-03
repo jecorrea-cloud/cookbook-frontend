@@ -24,7 +24,7 @@ export default class RecipeCard extends Component {
 
   handleDelete = () => {
 
-    fetch(`http://localhost:3000/recipes/${this.props.recipe.id}`, {
+    fetch(`https://git.heroku.com/book-cook-backend.git/recipes/${this.props.recipe.id}`, {
         method: "DELETE",
         headers: {
             "authorization": this.props.token
@@ -40,7 +40,7 @@ export default class RecipeCard extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    fetch(`http://localhost:3000/recipes/${this.props.recipe.id}`, {
+    fetch(`https://git.heroku.com/book-cook-backend.git/recipes/${this.props.recipe.id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

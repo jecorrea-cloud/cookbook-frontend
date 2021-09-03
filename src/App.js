@@ -22,7 +22,7 @@ class App extends Component {
     console.log("Hello!");
     if (localStorage.token) {
       console.log("Hello again!");
-      fetch("http://localhost:3000/profile", {
+      fetch("https://git.heroku.com/book-cook-backend.git/profile", {
         headers: {
           authorization: localStorage.token,
         },
