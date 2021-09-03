@@ -35,7 +35,7 @@ class App extends Component {
   handleLoginSubmit = (userInfo) => {
     console.log("Login form has been submitted");
 
-    fetch("http://localhost:3000/login", {
+    fetch("https://git.heroku.com/book-cook-backend.git/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -52,7 +52,7 @@ class App extends Component {
   handleRegisterSubmit = (userInfo) => {
     console.log("Register form has been submitted");
 
-    fetch("http://localhost:3000/users", {
+    fetch("https://git.heroku.com/book-cook-backend.git/users", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
